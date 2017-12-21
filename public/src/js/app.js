@@ -1,10 +1,17 @@
 var deferredPrompt;
 
+if (!window.Promise){
+	window.Promise = Promise;
+}
+
 if ('serviceWorker' in navigator){
 	navigator.serviceWorker
 		.register('/sw.js')
 		.then(function(){
 			console.log('Service worker registered.');
+		})
+		.catch(function(err){
+			console.log(err);
 		});
 }
 
@@ -22,6 +29,51 @@ var promise = new Promise(function(resolve, reject){
 	//console.log('This is executed once the timeout is done');
 	}, 3000);
 });
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://httpbin.org/ip');
+xhr.responseType = 'json';
+
+xhr.onload = function(){
+	console.log(xhr.response);
+};
+
+xhr.onload = function(){
+	console.log('Error!');
+};
+
+xhr.send();
+
+fetch('https://httpbin.org/ip')
+	.then(function(response){
+		console.log(response);
+		return response.json();
+	})
+	.then(function(data){
+		console.log(data);
+	})
+	.catch(function(err){
+		console.log(err);
+	});
+
+fetch('https://httpbin.org/post', {
+	method: 'POST',
+	headers: {
+		'Content-Type': 'application/json',
+		'Accept': 'application/json'
+	},
+	body: JSON.stringify({ message: 'Does this work?' })
+})
+	.then(function(response){
+		console.log(response);
+		return response.json();
+	})
+	.then(function(data){
+		console.log(data);
+	})
+	.catch(function(err){
+		console.log(err);
+	});
 
 //Don't use this way
 // promise.then(function(text){
