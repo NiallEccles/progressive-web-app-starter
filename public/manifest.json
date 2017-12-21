@@ -1,6 +1,7 @@
 {
 	"name": "PWAGram",
 	"short_name": "PWAGram",
+	"start_url": "/",
 	"url": "/index.html",
 	"scope": ".",
 	"display": "standalone",
