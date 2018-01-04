@@ -7,8 +7,6 @@ self.addEventListener('install', function(event){
 				cache.addAll([
 					'/',
 					'index.html',
-					'help/index.html',
-					'/help',
 					'/src/js/app.js',
 					'/src/js/feed.js',
 					'/src/js/promise.js',
@@ -46,7 +44,7 @@ self.addEventListener('fetch', function(event){
 							})
 					})
 					.catch(function(err){
-
+						
 					})
 			}
 		})
